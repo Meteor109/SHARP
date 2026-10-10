@@ -161,10 +161,9 @@ def main(args):
     setup_seed(0)
 
     data = load_data(args.dataset, graph_k=args.k)
-    if len(data) == 9:
-        features, edges, structural_encoding, _, _, _, labels, n_nodes, n_features = data
-    else:
-        features, edges, structural_encoding, _, _, _, labels, _, n_nodes, n_features = data
+    # Common layout: features, edges, SE, train/val/test, labels, [class_names], n_nodes, n_features
+    features, edges, structural_encoding = data[0], data[1], data[2]
+    labels, n_nodes, n_features = data[6], data[-2], data[-1]
     spatial = load_spatial_coordinates(args.dataset)
     if spatial.shape[0] != n_nodes:
         raise ValueError(f"Spatial/model spot mismatch: {spatial.shape[0]} versus {n_nodes}.")
