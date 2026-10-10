@@ -1,0 +1,14 @@
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib
+seaborn
+anndata
+scanpy
+torch
+dgl
+torch-geometric
+rpy2
+scikit-misc
+umap-learn
