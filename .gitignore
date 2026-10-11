@@ -1,6 +1,12 @@
 __pycache__/
 *.py[cod]
-/data
-/data/
-/results
-/results/
+.Rhistory
+.DS_Store
+
+/results/*
+!/results/.gitkeep
+/data/se/
+
+# Large AnnData matrices are distributed via GitHub Release assets
+/data/E18.5_mouse_brain/*.h5ad
+/data/Stereo/*.h5ad
