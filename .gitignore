@@ -7,6 +7,7 @@ __pycache__/
 !/results/.gitkeep
 /data/se/
 
-# Large AnnData matrices are distributed via GitHub Release assets
-/data/E18.5_mouse_brain/*.h5ad
-/data/Stereo/*.h5ad
+# Local raw datasets (download from sources in data/README.txt)
+/data/BRCA/
+/data/E18.5_mouse_brain/
+/data/Stereo/

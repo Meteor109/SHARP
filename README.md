@@ -67,7 +67,7 @@ This project is released under the MIT License. See `LICENSE.md`.
 The packages above are the main packages used in our experiments. Most CUDA-compatible PyTorch environments can run the code directly; we also provide `./requirements.txt` for convenience.
 
 ## Data
-The four experiment datasets used in the paper are provided under `./data/`:
+Raw datasets are **not** redistributed in this repository. Please download the four benchmarks from their original public sources and place them as follows:
 
 ```text
 data/
@@ -84,23 +84,29 @@ data/
     └── Stereo_DPI.h5ad
 ```
 
-The BRCA Visium inputs are included directly in this repository.
-Large `.h5ad` files (E18.5 / Stereo_AB / Stereo_DPI) are distributed as GitHub Release assets (`datasets-v1`).
-After cloning, download them with:
+### Download sources
+* **BRCA (10x Visium / Visium CytAssist human breast cancer)**  
+  10x Genomics public datasets: https://www.10xgenomics.com/datasets  
+  (search *Visium CytAssist Human Breast Cancer*).  
+  GEO example: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM7782699
 
-```bash
-bash scripts/download_data.sh
-```
+* **Mouse E18.5 Brain (MISAR-seq RNA)**  
+  Jiang et al., *Nature Methods*, 2023: https://www.nature.com/articles/s41592-023-01884-1  
+  Project page: https://www.biosino.org/node/project/detail/OEP003285  
+  Companion release: https://zenodo.org/record/7714382  
+  Save the RNA AnnData as `data/E18.5_mouse_brain/E18_adata_rna.h5ad` (annotation field: `Combined_Clusters`).
 
-Or download manually from: https://github.com/Meteor109/SHARP/releases/tag/datasets-v1
+* **Stereo_AB (ARTISTA Adult telencephalon)**  
+  ARTISTA download: https://db.cngb.org/stomics/artista/download/  
+  Download `Adult.h5ad` and place/rename to `data/Stereo/Stereo_AB.h5ad` (annotation field: `Annotation`).  
+  Dataset page: https://db.cngb.org/stomics/datasets/STDS0000056
 
-Annotation fields expected by the loaders:
-* E18.5 Mouse Brain: `Combined_Clusters`
-* Stereo_AB: `Annotation`
-* Stereo_DPI: `ground_truth` or `Annotation`
-* BRCA: `brca_ground_truth_annotation.csv`
+* **Stereo_DPI (ARTISTA 2DPI regeneration)**  
+  ARTISTA download: https://db.cngb.org/stomics/artista/download/  
+  Download the corresponding `2DPI_*.h5ad` section and place/rename to `data/Stereo/Stereo_DPI.h5ad`  
+  (annotation field: `ground_truth` or `Annotation`).
 
-See `./data/README.txt` for dataset source notes.
+See `./data/README.txt` for a concise checklist.
 
 ## Quick start
 
@@ -172,19 +178,17 @@ python main.py -dataset <DATASET_NAME> -k <spatial_knn> -refine_k <label_refine_
 ## Reference
 [1] J. Liu et al., “Decoding Spatial Heterophily: A Spectral Graph Contrastive Method for Spatially Resolved Transcriptomics,” IEEE BIBM, 2026.
 
-[2] K. Vandereyken, A. Sifrim, B. Thienpont, and T. Voet, “Methods and applications for single-cell and spatial multi-omics,” Nature Reviews Genetics, vol. 24, no. 8, pp. 494–515, 2023.
+[2] S. Jiang et al., “Simultaneous profiling of spatial gene expression and chromatin accessibility during mouse brain development,” Nature Methods, 2023. (MISAR-seq / Mouse E18.5)
 
-[3] K. Dong and S. Zhang, “Deciphering spatial domains from spatially resolved transcriptomics with an adaptive graph attention auto-encoder,” Nature Communications, vol. 13, no. 1, p. 1739, 2022.
+[3] X. Wei et al., “Single-cell Stereo-seq reveals induced progenitor cells involved in axolotl brain regeneration,” Science, 2022. (ARTISTA / Stereo_AB & Stereo_DPI)
 
-[4] Y. Long et al., “Spatially informed clustering, integration, and deconvolution of spatial transcriptomics with GraphST,” Nature Communications, vol. 14, no. 1, p. 1155, 2023.
+[4] K. Dong and S. Zhang, “Deciphering spatial domains from spatially resolved transcriptomics with an adaptive graph attention auto-encoder,” Nature Communications, vol. 13, no. 1, p. 1739, 2022.
 
-[5] Y. Zong et al., “conST: an interpretable multi-modal contrastive learning framework for spatial transcriptomics,” bioRxiv, 2022.
+[5] Y. Long et al., “Spatially informed clustering, integration, and deconvolution of spatial transcriptomics with GraphST,” Nature Communications, vol. 14, no. 1, p. 1155, 2023.
 
-[6] W. Yang and B. Mirzasoleiman, “Graph contrastive learning under heterophily via graph filters,” arXiv:2303.06344, 2023.
+[6] Y. Liu, Y. Zheng, D. Zhang, V. C. Lee, and S. Pan, “Beyond smoothing: Unsupervised graph representation learning with edge heterophily discriminating,” AAAI, 2023.
 
-[7] Y. Liu, Y. Zheng, D. Zhang, V. C. Lee, and S. Pan, “Beyond smoothing: Unsupervised graph representation learning with edge heterophily discriminating,” AAAI, 2023.
-
-[8] L. Moses and L. Pachter, “Museum of spatial transcriptomics,” Nature Methods, vol. 19, no. 5, pp. 534–546, 2022.
+[7] W. Yang and B. Mirzasoleiman, “Graph contrastive learning under heterophily via graph filters,” arXiv:2303.06344, 2023.
 
 ## Acknowledgment
 Parts of the graph contrastive design are inspired by heterophily-aware graph representation learning methods such as GREET / HLCL-style edge discrimination and spectral filtering.
