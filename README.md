@@ -45,7 +45,7 @@ python main.py -dataset BRCA -gpu 0 ...
 ---
 
 ## License
-This project is released under the MIT License. See `LICENSE.md`.
+This project is released under the MIT License. See `LICENSE`.
 
 ## Dependencies
 * python==3.9.18
